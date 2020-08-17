@@ -1,0 +1,91 @@
+/*
+####################################
+##		  	General			  	  ##
+####################################
+*/
+
+.user-name-caption{
+	width: 50%;
+	margin: 0em 25% 1em 25%;
+
+	margin-bottom: 0.3em;
+
+	text-align: center;
+	color: #C0C0C0;
+
+}
+.user-name-input{
+	width: 50%;
+	height: 2em;
+	box-sizing: border-box;
+
+	padding: 0.5em 1em 0.5em 1em;
+	margin: 0em 25% 1em 25% ;
+
+	border: 1px solid #C0C0C0;
+	border-radius: 25px;
+}
+
+
+.placeholder-wrapper{
+	width: 100%;
+	height: 3em;
+
+	margin: 1em 0 1em 0;
+
+	display: flex;
+    align-items: center;
+}
+
+.placeholder-line{
+	width: 40%;
+	height: 1px;
+
+	display: inline-block;
+
+	background-color: #000;
+}
+
+.placeholder-content{
+	width: 20%;
+
+	display: inline-block;
+
+	text-align: center;
+}
+
+#proto-main a{
+	font-weight: bold;
+	text-decoration: underline;
+
+	font-size: 1em;
+
+}
+
+#proto-header{
+	text-align: center;
+
+	border-bottom: 0px !important;
+
+	margin: 0 auto;
+}
+
+#proto-header {
+	font-size: 0.6em;
+}
+
+#website{
+	padding-top: 10%;
+	display: flex;
+	align-items: center;
+}
+
+
+.login-box{
+	width: 60%;
+	margin: 0 auto;
+
+	border: 1px solid #C0C0C0;
+	border-radius: 0.5em;
+}
+
