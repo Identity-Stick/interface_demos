@@ -84,9 +84,6 @@ function handleProcess(event) {
       }
       break;
     case processSteps.WAITFORSTICK:
-      if (event == userEvents.ENTERUSB) {
-        usbStickPluggedIn = !usbStickPluggedIn;
-      }
       if (event == userEvents.PRESSUSB && usbStickPluggedIn) {
         currentStep = processSteps.SUCCESS;
       } else if (event == userEvents.PRESSUSB) {
@@ -414,8 +411,52 @@ var Placeholder = function (_React$Component4) {
   return Placeholder;
 }(React.Component);
 
-var UserInputBox = function (_React$Component5) {
-  _inherits(UserInputBox, _React$Component5);
+var Footer = function (_React$Component5) {
+  _inherits(Footer, _React$Component5);
+
+  function Footer(props) {
+    _classCallCheck(this, Footer);
+
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        { "class": "footer" },
+        React.createElement(
+          "p",
+          null,
+          "The identity stick project is a finalist of the PrototypeFund round 7. It is supported by ",
+          React.createElement(
+            "a",
+            { href: "https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html" },
+            "BMBF"
+          ),
+          " and ",
+          React.createElement(
+            "a",
+            { href: "" },
+            "PrototypeFund"
+          ),
+          ".",
+          React.createElement(
+            "a",
+            { style: { marginLeft: "2em" }, href: "https://identity-stick.github.io/impressum" },
+            "Impressum"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Footer;
+}(React.Component);
+
+var UserInputBox = function (_React$Component6) {
+  _inherits(UserInputBox, _React$Component6);
 
   function UserInputBox(props) {
     _classCallCheck(this, UserInputBox);
@@ -439,8 +480,9 @@ var UserInputBox = function (_React$Component5) {
           null,
           this.props.text
         ),
-        React.createElement(UserInput, { message: "USB Stick einstecken", position: "left", type: userEvents.ENTERUSB }),
-        React.createElement(UserInput, { message: "Knopf dr\xFCcken", position: "middle", type: userEvents.PRESSUSB })
+        React.createElement(UserInput, { inactiveMessage: "USB Stick einstecken", activeMessage: "USB Stick entfernen", active: usbStickPluggedIn, position: "left", type: userEvents.ENTERUSB }),
+        React.createElement(UserInput, { inactiveMessage: "Knopf dr\xFCcken", position: "middle", type: userEvents.PRESSUSB }),
+        React.createElement(Footer, null)
       );
     }
   }]);
@@ -448,47 +490,48 @@ var UserInputBox = function (_React$Component5) {
   return UserInputBox;
 }(React.Component);
 
-var UserInput = function (_React$Component6) {
-  _inherits(UserInput, _React$Component6);
+var UserInput = function (_React$Component7) {
+  _inherits(UserInput, _React$Component7);
 
   function UserInput(props) {
     _classCallCheck(this, UserInput);
 
-    var _this6 = _possibleConstructorReturn(this, (UserInput.__proto__ || Object.getPrototypeOf(UserInput)).call(this, props));
+    var _this7 = _possibleConstructorReturn(this, (UserInput.__proto__ || Object.getPrototypeOf(UserInput)).call(this, props));
 
-    _this6.state = { active: false };
-    return _this6;
+    _this7.state = { active: false };
+    _this7.press = _this7.press.bind(_this7);
+    return _this7;
   }
 
   _createClass(UserInput, [{
+    key: "press",
+    value: function press() {
+      if (this.props.type == userEvents.ENTERUSB) {
+        usbStickPluggedIn = !usbStickPluggedIn;
+        this.setState({ active: !this.state.active });
+      }
+      handleProcess(this.props.type);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this7 = this;
-
       var classes = void 0;
       var currentState = void 0;
       if (this.state.active) {
         classes = "user-input active " + this.props.position;
-        currentState = "Active";
+        currentState = this.props.activeMessage;
       } else {
         classes = "user-input inactive " + this.props.position;
-        currentState = "Inactive";
+        currentState = this.props.inactiveMessage;
       }
       return React.createElement(
         "button",
         {
           className: classes,
-          onClick: function onClick() {
-            return _this7.setState({ active: !_this7.state.active }, handleProcess(_this7.props.type));
-          } },
+          onClick: this.press },
         React.createElement(
           "p",
-          null,
-          this.props.message
-        ),
-        React.createElement(
-          "p",
-          null,
+          { style: { fontWeight: "bold" } },
           currentState
         )
       );
@@ -498,8 +541,8 @@ var UserInput = function (_React$Component6) {
   return UserInput;
 }(React.Component);
 
-var FlowAnimation = function (_React$Component7) {
-  _inherits(FlowAnimation, _React$Component7);
+var FlowAnimation = function (_React$Component8) {
+  _inherits(FlowAnimation, _React$Component8);
 
   function FlowAnimation(props) {
     _classCallCheck(this, FlowAnimation);
@@ -568,8 +611,8 @@ var FlowAnimation = function (_React$Component7) {
   return FlowAnimation;
 }(React.Component);
 
-var CheckAnimation = function (_React$Component8) {
-  _inherits(CheckAnimation, _React$Component8);
+var CheckAnimation = function (_React$Component9) {
+  _inherits(CheckAnimation, _React$Component9);
 
   function CheckAnimation(props) {
     _classCallCheck(this, CheckAnimation);
@@ -596,8 +639,8 @@ var CheckAnimation = function (_React$Component8) {
   return CheckAnimation;
 }(React.Component);
 
-var Popover = function (_React$Component9) {
-  _inherits(Popover, _React$Component9);
+var Popover = function (_React$Component10) {
+  _inherits(Popover, _React$Component10);
 
   function Popover(props) {
     _classCallCheck(this, Popover);
@@ -623,8 +666,8 @@ var Popover = function (_React$Component9) {
   return Popover;
 }(React.Component);
 
-var PopoverOverlay = function (_React$Component10) {
-  _inherits(PopoverOverlay, _React$Component10);
+var PopoverOverlay = function (_React$Component11) {
+  _inherits(PopoverOverlay, _React$Component11);
 
   function PopoverOverlay(props) {
     _classCallCheck(this, PopoverOverlay);
@@ -684,8 +727,8 @@ var PopoverOverlay = function (_React$Component10) {
   return PopoverOverlay;
 }(React.Component);
 
-var PopOverlayHeader = function (_React$Component11) {
-  _inherits(PopOverlayHeader, _React$Component11);
+var PopOverlayHeader = function (_React$Component12) {
+  _inherits(PopOverlayHeader, _React$Component12);
 
   function PopOverlayHeader(props) {
     _classCallCheck(this, PopOverlayHeader);
@@ -824,8 +867,8 @@ var PopOverlayHeader = function (_React$Component11) {
   return PopOverlayHeader;
 }(React.Component);
 
-var PopOverlayContent = function (_React$Component12) {
-  _inherits(PopOverlayContent, _React$Component12);
+var PopOverlayContent = function (_React$Component13) {
+  _inherits(PopOverlayContent, _React$Component13);
 
   function PopOverlayContent(props) {
     _classCallCheck(this, PopOverlayContent);
@@ -1008,8 +1051,8 @@ var PopOverlayContent = function (_React$Component12) {
   return PopOverlayContent;
 }(React.Component);
 
-var PopoverContentWithIcon = function (_React$Component13) {
-  _inherits(PopoverContentWithIcon, _React$Component13);
+var PopoverContentWithIcon = function (_React$Component14) {
+  _inherits(PopoverContentWithIcon, _React$Component14);
 
   function PopoverContentWithIcon(props) {
     _classCallCheck(this, PopoverContentWithIcon);
@@ -1040,8 +1083,8 @@ var PopoverContentWithIcon = function (_React$Component13) {
   return PopoverContentWithIcon;
 }(React.Component);
 
-var PinEingabe = function (_React$Component14) {
-  _inherits(PinEingabe, _React$Component14);
+var PinEingabe = function (_React$Component15) {
+  _inherits(PinEingabe, _React$Component15);
 
   function PinEingabe(props) {
     _classCallCheck(this, PinEingabe);
@@ -1078,13 +1121,40 @@ var PinEingabe = function (_React$Component14) {
   return PinEingabe;
 }(React.Component);
 
+var InfoBox = function (_React$Component16) {
+  _inherits(InfoBox, _React$Component16);
+
+  function InfoBox(props) {
+    _classCallCheck(this, InfoBox);
+
+    return _possibleConstructorReturn(this, (InfoBox.__proto__ || Object.getPrototypeOf(InfoBox)).call(this, props));
+  }
+
+  _createClass(InfoBox, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        { "class": "popover-info" },
+        React.createElement(
+          "div",
+          { style: { width: "100%", fontWeight: "bold" } },
+          "HINWEIS:"
+        ),
+        this.props.content
+      );
+    }
+  }]);
+
+  return InfoBox;
+}(React.Component);
 /*
 This component displays the whole website. Rerender this, if all components need to be updated
 */
 
 
-var App = function (_React$Component15) {
-  _inherits(App, _React$Component15);
+var App = function (_React$Component17) {
+  _inherits(App, _React$Component17);
 
   function App(props) {
     _classCallCheck(this, App);
@@ -1108,6 +1178,7 @@ var App = function (_React$Component15) {
       return React.createElement(
         "div",
         null,
+        React.createElement(InfoBox, { content: "Dies ist eine Demo-Webseite. Es werden keinerlei Informationen \xFCbertragen." }),
         React.createElement(PrototypeWebsite, { isLanding: isLanding, isSuccess: isSuccess }),
         React.createElement(UserInputBox, Object.assign({ title: "Input zur Webseite" }, text))
       );

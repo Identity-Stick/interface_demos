@@ -18,6 +18,18 @@ html, body {
     background-color: /*#fff3ca*/ #ffffff;
 }
 
+.footer{
+	position: fixed;
+	bottom: 0;
+
+	font-size: 0.8em;
+}
+
+/*
+####################################
+##		  	Popover			  	  ##
+####################################
+*/
 .popover{
 	width: 40%;
 	max-width: 500px;
@@ -56,15 +68,16 @@ html, body {
 }
 
 #opaque-overlay{
-	position: fixed; /* Sit on top of the page content */
-	width: 100%; /* Full width (cover the whole page) */
-	height: 75%; /* Full height (cover the whole page) */
+	position: fixed; 
+	width: 100%; 
+	height: 75%; 
 	top: 0;
 	left: 0;
-	background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-	z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+	z-index: 2; 
 
 	margin: 0 auto;
+
+	background-color: rgba(0,0,0,0.5); 
 }
 
 
@@ -90,6 +103,27 @@ html, body {
 .popover-icon img{
 	width: 2.5em;
 }
+
+.popover-info{
+	position: fixed;
+	width: 30%; 
+	top: 0;
+	right: 20px;
+	z-index: 3; 
+
+	margin: 0 auto;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+
+	font-size: 0.8em;
+	color: #fff;
+
+	background-color: #3064BF; 
+	box-shadow: 0.2em 0.2em 2px #C0C0C0;	
+	
+
+	
+}
+
 /*
 ####################################
 ##		  Protoype Website	  	  ##
@@ -227,6 +261,10 @@ html, body {
     border-top: 1px solid #C0C0C0;
 }
 
+#user-input-box button{
+	background-color: #DCDCDC
+}
+
 .user-input{
 	width: 30%;
 
@@ -239,9 +277,9 @@ html, body {
 }
 
 .active{
-	border: 1px solid red;
+	border: 4px solid #3064BF;
 }
 
 .inactive{
-	border: 1px solid green;
+	border: 4px solid #DCDCDC;
 }

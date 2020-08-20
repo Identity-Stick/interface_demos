@@ -78,10 +78,6 @@ function handleProcess(event){
         }
       break;
     case processSteps.WAITFORSTICK:
-        if(event == userEvents.ENTERUSB){
-          usbStickPluggedIn = !usbStickPluggedIn;
-          
-        }
         if( event == userEvents.PRESSUSB && usbStickPluggedIn){
           currentStep = processSteps.SUCCESS; 
         }else if(event == userEvents.PRESSUSB){
@@ -297,6 +293,23 @@ class Placeholder extends React.Component{
     );
   }
 }
+
+class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
+      <div class="footer">
+        <p>
+          The identity stick project is a finalist of the PrototypeFund round 7. It is supported by <a href="https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html">BMBF</a> and <a href="">PrototypeFund</a>.
+          <a style={{marginLeft: "2em"}} href="https://identity-stick.github.io/impressum">Impressum</a>
+        </p>
+      </div>
+    );
+  }
+}
 class UserInputBox extends React.Component {
   constructor(props) {
     super(props);
@@ -307,8 +320,9 @@ class UserInputBox extends React.Component {
       <div id="user-input-box">
         <h2>{this.props.title}</h2>
         <p>{this.props.text}</p>
-        <UserInput message="USB Stick einstecken" position="left" type={userEvents.ENTERUSB}/>
-        <UserInput message="Knopf drücken" position="middle" type={userEvents.PRESSUSB}/>
+        <UserInput inactiveMessage="USB Stick einstecken" activeMessage="USB Stick entfernen" active={usbStickPluggedIn} position="left" type={userEvents.ENTERUSB}/>
+        <UserInput inactiveMessage="Knopf drücken" position="middle" type={userEvents.PRESSUSB}/>
+        <Footer />
       </div>
     );
   }
@@ -318,6 +332,15 @@ class UserInput extends React.Component{
   constructor(props){
     super(props);
     this.state = {active: false}
+    this.press = this.press.bind(this);
+  }
+  press(){
+    if(this.props.type == userEvents.ENTERUSB){
+      usbStickPluggedIn = !usbStickPluggedIn
+      this.setState({active: !this.state.active})
+
+    }
+    handleProcess(this.props.type)
   }
 
   render(){
@@ -325,17 +348,16 @@ class UserInput extends React.Component{
     let currentState;
     if(this.state.active){
       classes = "user-input active " + this.props.position
-      currentState = "Active"
+      currentState = this.props.activeMessage
     }else{
       classes = "user-input inactive " + this.props.position
-      currentState = "Inactive"
+      currentState = this.props.inactiveMessage
     }
     return (
       <button 
         className={classes}
-        onClick={()=> this.setState({active: !this.state.active}, handleProcess(this.props.type))}>
-        <p>{this.props.message}</p>
-        <p>{currentState}</p>
+        onClick={this.press}>
+        <p style={{ fontWeight: "bold"}}>{currentState}</p>
       </button>
     );
   }
@@ -759,7 +781,20 @@ class PinEingabe extends React.Component{
     );
   }
 }
+class InfoBox extends React.Component{
+  constructor(props){
+    super(props);
+  }
 
+  render(){
+    return(
+      <div class="popover-info">
+        <div style={{width: "100%", fontWeight: "bold"}}>HINWEIS:</div>
+        {this.props.content}
+      </div>
+    );
+  }
+}
 /*
 This component displays the whole website. Rerender this, if all components need to be updated
 */
@@ -781,6 +816,7 @@ class App extends React.Component{
     }
     return(
       <div>
+        <InfoBox content="Dies ist eine Demo-Webseite. Es werden keinerlei Informationen übertragen." />
         <PrototypeWebsite isLanding={isLanding} isSuccess={isSuccess}/>
         <UserInputBox title="Input zur Webseite" {...text}/>
       </div>
