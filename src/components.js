@@ -338,11 +338,19 @@ class Footer extends React.Component {
 
   render() {
     return(
-      <div class="footer">
-        <p>
-          The identity stick project is a finalist of the PrototypeFund round 7. It is supported by <a href="https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html">BMBF</a> and <a href="">PrototypeFund</a>.
-          <a style={{marginLeft: "2em"}} href="https://identity-stick.github.io/impressum">Impressum</a>
-        </p>
+      <div>
+        <div style={{display: "flex", alignItems: "center"}}>
+          <a href="https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html"><img src="../../../ressourcen/BMBF_gef%C3%AErdert%20vom_deutsch.jpg" height="90"  alt="BMBF"></img></a>
+        
+          <a href="https://prototypefund.de/"><img src="https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg" width="100" alt="Prototype Fund"></img></a>
+        </div>
+        <div class="footer">
+          <p>
+          
+            Diese Demo ist Teil des Projekts Identity Stick. Das Projekt Identity Stick ist Finalist der PrototypeFund Runde 7.
+            <a style={{marginLeft: "2em"}} href="https://identity-stick.github.io/impressum">Impressum</a>
+          </p>
+        </div>
       </div>
     );
   }
@@ -642,7 +650,7 @@ class PopOverlayContent extends React.Component{
             <p>Optionen</p>
             <div className="popover-wrapper">
               <div className="popover-icon">
-                <img src="icons/usb-stick-bg.png" alt="Schwarzweißes Icon von inem USB Stick"></img>
+                <img src="icons/usb-stick-bg.png" alt="Schwarzweißes Icon von einem USB Stick"></img>
               </div>
               <button className="popover-user-input-button" onClick={() => handleProcess(siteEvents.USEUSB)}>USB-Stick verwenden</button>
             </div>
@@ -805,7 +813,7 @@ class InfoBox extends React.Component{
 
   render(){
     return(
-      <div class="popover-info">
+      <div class="popover-info-box">
         <div style={{width: "100%", fontWeight: "bold"}}>HINWEIS:</div>
         {this.props.content}
       </div>

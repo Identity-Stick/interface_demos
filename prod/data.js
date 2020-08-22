@@ -1,1 +1,0 @@
-var text = "Lorem ipsum dolorem";

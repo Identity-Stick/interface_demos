@@ -425,27 +425,33 @@ var Footer = function (_React$Component5) {
     value: function render() {
       return React.createElement(
         "div",
-        { "class": "footer" },
+        null,
         React.createElement(
-          "p",
-          null,
-          "The identity stick project is a finalist of the PrototypeFund round 7. It is supported by ",
+          "div",
+          { style: { display: "flex", alignItems: "center" } },
           React.createElement(
             "a",
             { href: "https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html" },
-            "BMBF"
+            React.createElement("img", { src: "../../../ressourcen/BMBF_gef%C3%AErdert%20vom_deutsch.jpg", height: "90", alt: "BMBF" })
           ),
-          " and ",
           React.createElement(
             "a",
-            { href: "" },
-            "PrototypeFund"
-          ),
-          ".",
+            { href: "https://prototypefund.de/" },
+            React.createElement("img", { src: "https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg", width: "100", alt: "Prototype Fund" })
+          )
+        ),
+        React.createElement(
+          "div",
+          { "class": "footer" },
           React.createElement(
-            "a",
-            { style: { marginLeft: "2em" }, href: "https://identity-stick.github.io/impressum" },
-            "Impressum"
+            "p",
+            null,
+            "Diese Demo ist Teil des Projekts Identity Stick. Das Projekt Identity Stick ist Finalist der PrototypeFund Runde 7.",
+            React.createElement(
+              "a",
+              { style: { marginLeft: "2em" }, href: "https://identity-stick.github.io/impressum" },
+              "Impressum"
+            )
           )
         )
       );
@@ -1135,7 +1141,7 @@ var InfoBox = function (_React$Component16) {
     value: function render() {
       return React.createElement(
         "div",
-        { "class": "popover-info" },
+        { "class": "popover-info-box" },
         React.createElement(
           "div",
           { style: { width: "100%", fontWeight: "bold" } },
@@ -1180,7 +1186,7 @@ var App = function (_React$Component17) {
         null,
         React.createElement(InfoBox, { content: "Dies ist eine Demo-Webseite. Es werden keinerlei Informationen \xFCbertragen." }),
         React.createElement(PrototypeWebsite, { isLanding: isLanding, isSuccess: isSuccess }),
-        React.createElement(UserInputBox, Object.assign({ title: "Input zur Webseite" }, text))
+        React.createElement(UserInputBox, Object.assign({ title: "Bitte nutzen Sie die Buttons als Input f\xFCr die Demo-Webseite" }, text))
       );
     }
   }]);
